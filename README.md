@@ -1,3 +1,5 @@
+could you explain this code in one line above all it should be dev friendly due to it's a template
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
