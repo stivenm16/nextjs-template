@@ -1,5 +1,7 @@
 'use client'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -26,22 +28,22 @@ const LoginForm = () => {
 
   const [isRegister, setIsRegister] = useState(true)
   const [error, setError] = useState('')
-  // const router = useRouter()
+  const router = useRouter()
   const onSubmit = async (data: IFormInput) => {
     if (data) {
       if (isRegister) {
         // Cusotm logic for sign in
-        // const res = await signIn('credentials', {
-        //   email: data.email,
-        //   password: data.password,
-        //   redirect: false,
-        // })
-        // if (res?.error) {
-        //   setError(res?.error)
-        // } else {
-        //   router.push('/auth/components')
-        //   router.refresh()
-        // }
+        const res = await signIn('credentials', {
+          email: data.email,
+          password: data.password,
+          redirect: false,
+        })
+        if (res?.error) {
+          setError(res?.error)
+        } else {
+          router.push('/auth/private')
+          router.refresh()
+        }
       } else {
         // Custom logic for sign up
         setIsRegister(true)
@@ -58,7 +60,7 @@ const LoginForm = () => {
           <input
             type="email"
             id="email"
-            className={'w-full px-4 py-2 rounded border '}
+            className={'w-full px-4 py-2 rounded border text-indigo-950 '}
             {...register('email', {
               required: {
                 value: true,
@@ -84,7 +86,7 @@ const LoginForm = () => {
                 message: 'Password is required',
               },
             })}
-            className={'w-full px-4 py-2 rounded border'}
+            className={'w-full px-4 py-2 rounded border text-indigo-950'}
           />
           <p className="text-white text-xs font-bold mt-1">
             {errors.password?.message}
@@ -108,7 +110,7 @@ const LoginForm = () => {
                   message: 'confirm Password is required',
                 },
               })}
-              className={'w-full px-4 py-2 rounded border'}
+              className={'w-full px-4 py-2 rounded border text-indigo-950'}
             />
             <p className="text-white text-xs font-bold mt-1">
               {errors.confirmPassword?.message}
