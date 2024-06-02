@@ -51,85 +51,96 @@ const LoginForm = () => {
     }
   }
   return (
-    <div className="bg-indigo-800 p-8 rounded-xl shadow-xl h-fit w-full mx-4 md:w-1/4   relative">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 z-10">
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-white font-bold mb-1">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            className={'w-full px-4 py-2 rounded border text-indigo-950 '}
-            {...register('email', {
-              required: {
-                value: true,
-                message: 'Email is required',
-              },
-            })}
-          />
-          <span className="text-white text-xs font-bold mt-1">
-            {errors.email?.message}
-          </span>
-        </div>
+    <div className="bg-indigo-800 p-8 rounded-xl shadow-xl h-fit w-80 mx-4    relative">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-4 z-10 h-[380px] flex flex-col justify-between"
+      >
+        <div>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-white font-bold mb-1">
+              Email:
+            </label>
+            <input
+              type="email"
+              id="email"
+              className={'w-full px-4 py-2 rounded border text-indigo-950 '}
+              {...register('email', {
+                required: {
+                  value: true,
+                  message: 'Email is required',
+                },
+              })}
+            />
+            <span className="text-white text-xs font-bold mt-1">
+              {errors.email?.message}
+            </span>
+          </div>
 
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-white font-bold mb-1">
-            Password:
-          </label>
-          <input
-            type="password"
-            id="password"
-            {...register('password', {
-              required: {
-                value: true,
-                message: 'Password is required',
-              },
-            })}
-            className={'w-full px-4 py-2 rounded border text-indigo-950'}
-          />
-          <p className="text-white text-xs font-bold mt-1">
-            {errors.password?.message}
-          </p>
-        </div>
-
-        {!isRegister && (
           <div className="mb-4">
             <label
-              htmlFor="confirmPassword"
+              htmlFor="password"
               className="block text-white font-bold mb-1"
             >
-              Confirm password:
+              Password:
             </label>
             <input
               type="password"
-              id="confirmPassword"
-              {...register('confirmPassword', {
+              id="password"
+              {...register('password', {
                 required: {
                   value: true,
-                  message: 'confirm Password is required',
+                  message: 'Password is required',
                 },
               })}
               className={'w-full px-4 py-2 rounded border text-indigo-950'}
             />
             <p className="text-white text-xs font-bold mt-1">
-              {errors.confirmPassword?.message}
+              {errors.password?.message}
             </p>
           </div>
-        )}
 
-        <Button type="submit" customStyles="w-full">
-          Login
-        </Button>
-        <p className="text-white text-center pt-auto">
-          {!isRegister ? 'Already have an account?' : "Don't have an account?"}
-          <span
-            className="text-indigo-300 cursor-pointer ml-2"
-            onClick={() => setIsRegister(!isRegister)}
-          >
-            Sign up
-          </span>
-        </p>
+          {!isRegister && (
+            <div className="mb-4">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-white font-bold mb-1"
+              >
+                Confirm password:
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                {...register('confirmPassword', {
+                  required: {
+                    value: true,
+                    message: 'confirm Password is required',
+                  },
+                })}
+                className={'w-full px-4 py-2 rounded border text-indigo-950'}
+              />
+              <p className="text-white text-xs font-bold mt-1">
+                {errors.confirmPassword?.message}
+              </p>
+            </div>
+          )}
+        </div>
+        <div className="mt-auto pt-auto relative">
+          <Button type="submit" customStyles="w-full mt-auto">
+            Login
+          </Button>
+          <p className="text-white text-center pt-auto">
+            {!isRegister
+              ? 'Already have an account?'
+              : "Don't have an account?"}
+            <span
+              className="text-indigo-300 cursor-pointer ml-2"
+              onClick={() => setIsRegister(!isRegister)}
+            >
+              Sign up
+            </span>
+          </p>
+        </div>
       </form>
     </div>
   )
